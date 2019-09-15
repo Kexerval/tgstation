@@ -787,7 +787,7 @@
 	name = "Wisp"
 	icon_state = "hair_wisp"
 
-/datum/sprite_accessory/hair/wisp
+/datum/sprite_accessory/hair/strappingboomer
 	name = "Strapping Boomer"
 	icon_state = "hair_strappingboomer"
 
