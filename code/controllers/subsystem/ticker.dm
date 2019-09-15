@@ -636,28 +636,28 @@ SUBSYSTEM_DEF(ticker)
 	if(!round_end_sound)
 		round_end_sound = pick(\
 		'sound/roundend/2loud4me.ogg',
-		'sound/roundend/AAAAAAAAAAAAH.ogg',
+		'sound/roundend/aaaaaaaaaaaah.ogg',
 		'sound/roundend/aneurism.ogg',
 		'sound/roundend/ayayaclean.ogg',
-		'sound/roundend/DAYTONA.ogg',
-		'sound/roundend/first of all.ogg',
+		'sound/roundend/daytona.ogg',
+		'sound/roundend/firstofall.ogg',
 		'sound/roundend/fuckingassholebitch.ogg',
-		'sound/roundend/god fking damnit.ogg',
-		'sound/roundend/im_not_fucking_bald.ogg',
-		'sound/roundend/is this poop.ogg',
+		'sound/roundend/godfkingdamnit.ogg',
+		'sound/roundend/imnotfuckingbald.ogg',
+		'sound/roundend/isthispoop.ogg',
 		'sound/roundend/lul.ogg',
-		'sound/roundend/MALD.ogg',
+		'sound/roundend/mald.ogg',
 		'sound/roundend/mango.ogg',
 		'sound/roundend/moon2l.ogg',
-		'sound/roundend/Moons_Confession.ogg',
-		'sound/roundend/MoonScream.ogg',
+		'sound/roundend/moonsconfession.ogg',
+		'sound/roundend/moonscream.ogg',
 		'sound/roundend/noice.ogg',
-		'sound/roundend/NOOOOOOOOOOOOOOOO.ogg',
+		'sound/roundend/noooooooooooooooo.ogg',
 		'sound/roundend/poggers.ogg',
 		'sound/roundend/skrrrt.ogg',
 		'sound/roundend/smile.ogg',
-		'sound/roundend/TWENTY FOUR NINETY NINE.ogg',
-		'sound/roundend/youre grounded.ogg'\
+		'sound/roundend/twentyfourninetynine.ogg',
+		'sound/roundend/youregrounded.ogg'\
 		)
 
 	SEND_SOUND(world, sound(round_end_sound))
