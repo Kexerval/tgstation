@@ -787,6 +787,10 @@
 	name = "Wisp"
 	icon_state = "hair_wisp"
 
+/datum/sprite_accessory/hair/wisp
+	name = "Strapping Boomer"
+	icon_state = "hair_strappingboomer"
+
 /////////////////////////////
 // Facial Hair Definitions //
 /////////////////////////////
