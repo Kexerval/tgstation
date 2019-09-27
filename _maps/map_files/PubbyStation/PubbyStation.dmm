@@ -21083,7 +21083,7 @@
 /area/crew_quarters/bar)
 "bco" = (
 /obj/structure/table/wood/fancy,
-/obj/item/gun/ballistic/revolver/russian{
+/obj/effect/spawner/lootdrop/russian_revolver{
 	pixel_y = 16
 	},
 /obj/item/storage/box/matches{
