@@ -368,4 +368,9 @@
 				/obj/item/dice/fourdd6 = 1,
 				/obj/item/dice/d100 = 1
 				)
-
+/obj/effect/spawner/lootdrop/russian_revolver
+	name = "normal or cursed russian revolver spawner"
+	loot = list(
+				/obj/item/gun/ballistic/revolver/russian = 1,
+				/obj/item/gun/ballistic/revolver/russian/soul = 1
+				)
