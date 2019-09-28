@@ -25,6 +25,20 @@
 "ag" = (
 /turf/closed/wall/mineral/titanium,
 /area/awaymission/undergroundoutpost45/central)
+"ah" = (
+/obj/effect/turf_decal/sand/plating,
+/obj/effect/turf_decal/stripes/asteroid/line{
+	dir = 5
+	},
+/turf/open/floor/plating/airless,
+/area/awaymission/undergroundoutpost45/caves)
+"ai" = (
+/obj/effect/turf_decal/sand/plating,
+/obj/effect/turf_decal/stripes/asteroid/line{
+	dir = 4
+	},
+/turf/open/floor/plating/airless,
+/area/awaymission/undergroundoutpost45/caves)
 "aj" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel{
@@ -131,6 +145,13 @@
 	heat_capacity = 1e+006
 	},
 /area/awaymission/undergroundoutpost45/central)
+"av" = (
+/obj/effect/turf_decal/sand/plating,
+/obj/effect/turf_decal/stripes/asteroid/line{
+	dir = 6
+	},
+/turf/open/floor/plating/airless,
+/area/awaymission/undergroundoutpost45/caves)
 "ax" = (
 /obj/effect/landmark/awaystart,
 /turf/open/floor/plasteel{
@@ -2091,15 +2112,6 @@
 	icon_state = "platingdmg1"
 	},
 /area/awaymission/undergroundoutpost45/central)
-"eu" = (
-/turf/open/floor/plating{
-	heat_capacity = 1e+006;
-	icon_plating = "asteroidplating";
-	icon_state = "asteroidplating";
-	initial_gas_mix = "co2=173.4;n2=135.1;plasma=229.8;TEMP=351.9";
-	temperature = 363.9
-	},
-/area/awaymission/undergroundoutpost45/caves)
 "ev" = (
 /obj/item/clothing/under/misc/pj,
 /obj/structure/closet/secure_closet/personal/cabinet{
@@ -13271,13 +13283,6 @@
 	name = "Cave Floor";
 	temperature = 363.9
 	},
-/area/awaymission/undergroundoutpost45/caves)
-"DJ" = (
-/obj/effect/turf_decal/sand/plating,
-/obj/effect/turf_decal/stripes/asteroid/line{
-	dir = 6
-	},
-/turf/open/floor/plating/airless,
 /area/awaymission/undergroundoutpost45/caves)
 "KE" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
@@ -41969,7 +41974,7 @@ tT
 gy
 uN
 hH
-eu
+UM
 eJ
 ad
 ad
@@ -42226,7 +42231,7 @@ tU
 uw
 uO
 vk
-eu
+OF
 eJ
 eJ
 ad
@@ -42483,7 +42488,7 @@ tV
 ux
 uP
 hH
-eu
+av
 eJ
 eJ
 eJ
@@ -48668,7 +48673,7 @@ xY
 yb
 ye
 ww
-DJ
+av
 eJ
 eJ
 eJ
@@ -50669,9 +50674,9 @@ ad
 ad
 ad
 ad
-eu
-eu
-eu
+ah
+ai
+av
 fn
 eJ
 eJ
