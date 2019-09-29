@@ -271,8 +271,7 @@ GLOBAL_LIST_INIT(megafauna_spawn_list, list(/mob/living/simple_animal/hostile/me
 					if(ispath(maybe_boss, /mob/living/simple_animal/hostile/megafauna/bubblegum)) //there can be only one bubblegum, so don't waste spawns on it
 						if(bubblespawn)
 							megafauna_spawn_list.Remove(maybe_boss)
-						else
-							bubblespawn = TRUE
+						bubblespawn = TRUE
 			else //this is not danger, don't spawn a boss, spawn something else
 				randumb = pickweight(mob_spawn_list)
 
