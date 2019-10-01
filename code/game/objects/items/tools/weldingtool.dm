@@ -139,9 +139,8 @@
 			if(L.IgniteMob())
 				message_admins("[ADMIN_LOOKUPFLW(user)] set [key_name_admin(L)] on fire with [src] at [AREACOORD(user)]")
 				log_game("[key_name(user)] set [key_name(L)] on fire with [src] at [AREACOORD(user)]")
-		else
-			if(!isobj(O))
-				to_chat(user, "<span class='warning'>[src] has no effect, you've wasted some fuel!</span>")
+		else if((!O.welder_act() && !isobj(O)) || (!O.welder_act() && isitem(O)))
+			to_chat(user, "<span class='warning'>[src] has no effect, you've wasted some fuel!</span>")
 
 /obj/item/weldingtool/attack_self(mob/user)
 	if(src.reagents.has_reagent(/datum/reagent/toxin/plasma))
