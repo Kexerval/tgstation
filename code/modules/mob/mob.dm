@@ -61,12 +61,15 @@
   * * set a random nutrition level
   * * Intialize the movespeed of the mob
   */
+///mob/var/newplayer_respawn_timer_id
+
 /mob/Initialize()
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_CREATED, src)
 	GLOB.mob_list += src
 	GLOB.mob_directory[tag] = src
 	if(stat == DEAD)
 		GLOB.dead_mob_list += src
+		//newplayer_respawn_timer_id = addtimer(CALLBACK(src, /mob/proc/newplayer_respawn_toggle_timer), 10, TIMER_CLIENT_TIME | TIMER_STOPPABLE)
 	else
 		GLOB.alive_mob_list += src
 	set_focus(src)
@@ -581,6 +584,53 @@
 //	M.Login()	//wat
 	return
 
+//var/newplayer_respawn_toggle = FALSE
+//var/newplayer_timer_status = timeleft(newplayer_respawn_timer_id)
+
+///mob/proc/newplayer_respawn_toggle_timer()
+//	newplayer_respawn_toggle = TRUE
+//	to_chat(usr, "<span class='boldnotice'>You may now respawn!</span>")
+
+/mob/verb/abandon_mob2()
+	set name = "New Player Respawn"
+	set category = "OOC"
+	//if(newplayer_respawn_toggle == FALSE)
+	if ((stat != DEAD || !( SSticker )))
+		to_chat(usr, "<span class='boldnotice'>You must be dead to use this!</span>")
+		return
+	else
+		//for(var/i in GLOB.dead_mob_list)
+		//	var/mob/living/O = i
+		//	var/deathtime = world.time - (O.timeofdeath)
+		var/mob/living/O = usr
+		var/deathtime = world.time - O.timeofdeath
+		if(deathtime < 600)
+			to_chat(usr, "<span class='warning'>World Time is [world.time], Time of Death is [O.timeofdeath], deathtime is [deathtime] </span>")
+			return
+		var/res = alert(usr, "Do you want to respawn?",, "Yes", "No")
+		switch(res)
+			if("Yes")
+				to_chat(usr, "<span class='boldnotice'>Please roleplay correctly!</span>")
+
+				if(!client)
+					log_game("[key_name(usr)] AM failed due to disconnect.")
+					return
+				client.screen.Cut()
+				client.screen += client.void
+				if(!client)
+					log_game("[key_name(usr)] AM failed due to disconnect.")
+					return
+
+				var/mob/dead/new_player/M2 = new /mob/dead/new_player()
+				if(!client)
+					log_game("[key_name(usr)] AM failed due to disconnect.")
+					qdel(M2)
+					return
+				M2.key = key
+			//	M.Login()	//wat
+				return
+			if("No")
+				return
 
 /**
   * Sometimes helps if the user is stuck in another perspective or camera
