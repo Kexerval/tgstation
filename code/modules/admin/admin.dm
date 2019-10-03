@@ -641,11 +641,10 @@
 
 	if(!check_rights(R_SERVER,0))
 		return
-	to_chat(usr, "<span class='boldnotice'>Current respawn timer is: [CONFIG_GET(number/respawntime)]</span>")
 	if(time < 0)
 		return
-
 	CONFIG_SET(number/respawntime, time)
+	var/respawntime = CONFIG_GET(number/respawntime)
 	//GLOB.respawntime = time
 
 	log_admin("[key_name(usr)] set the respawn time to [respawntime * 0.1] seconds.")

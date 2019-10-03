@@ -595,8 +595,8 @@
 	set name = "Timed Respawn"
 	set category = "OOC"
 
-	/var/respawntime = CONFIG_GET(number/respawntime)
-	if(respawntime == CONFIG_GET(number/respawntime))
+	var/respawntime = CONFIG_GET(number/respawntime)
+	if(respawntime == 0)
 		to_chat(usr, "<span class='boldnotice'>Respawning is disabled.</span>")
 		return
 	if ((stat != DEAD || !( SSticker )))
