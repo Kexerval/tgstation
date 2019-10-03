@@ -645,7 +645,6 @@
 		return
 	CONFIG_SET(number/respawntime, time)
 	var/respawntime = CONFIG_GET(number/respawntime)
-	//GLOB.respawntime = time
 
 	log_admin("[key_name(usr)] set the respawn time to [respawntime * 0.1] seconds.")
 	message_admins("[key_name(usr)] set the respawn time to [respawntime * 0.1] seconds.")

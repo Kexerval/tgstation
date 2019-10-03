@@ -584,13 +584,6 @@
 //	M.Login()	//wat
 	return
 
-//var/newplayer_respawn_toggle = FALSE
-//var/newplayer_timer_status = timeleft(newplayer_respawn_timer_id)
-
-///mob/proc/newplayer_respawn_toggle_timer()
-//	newplayer_respawn_toggle = TRUE
-//	to_chat(usr, "<span class='boldnotice'>You may now respawn!</span>")
-
 /mob/verb/timed_respawn()
 	set name = "Timed Respawn"
 	set category = "OOC"
@@ -602,6 +595,7 @@
 	if ((stat != DEAD || !( SSticker )))
 		to_chat(usr, "<span class='boldnotice'>You must be dead to use this!</span>")
 		return
+
 	else
 		for(var/i in GLOB.dead_mob_list)
 			var/mob/living/O = i
@@ -624,10 +618,10 @@
 				var/res = alert(usr, "Do you want to respawn?",, "Yes", "No")
 				switch(res)
 					if("Yes")
-
 						if(!client)
 							log_game("[key_name(usr)] AM failed due to disconnect.")
 							return
+
 						client.screen.Cut()
 						client.screen += client.void
 						if(!client)
@@ -641,8 +635,8 @@
 							log_game("[key_name(usr)] AM failed due to disconnect.")
 							qdel(M2)
 							return
+
 						M2.key = key
-					//	M.Login()	//wat
 						return
 					if("No")
 						return
