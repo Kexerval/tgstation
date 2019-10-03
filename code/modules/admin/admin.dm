@@ -634,6 +634,23 @@
 			log_admin("[key_name(usr)] set the pre-game delay to [DisplayTimeText(newtime)].")
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Delay Game Start") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/set_respawn_time(time as num)
+	set category = "Server"
+	set desc = "Sets the global respawn timer. Set to 0 to disable Timed Respawn system."
+	set name = "Set Respawn Timer"
+
+	if(!check_rights(R_SERVER,0))
+		return
+	to_chat(usr, "<span class='boldnotice'>Current respawn timer is: [CONFIG_GET(number/respawntime)]</span>")
+	if(time < 0)
+		return
+
+	CONFIG_SET(number/respawntime, time)
+	//GLOB.respawntime = time
+
+	log_admin("[key_name(usr)] set the respawn time to [respawntime * 0.1] seconds.")
+	message_admins("[key_name(usr)] set the respawn time to [respawntime * 0.1] seconds.")
+
 /datum/admins/proc/unprison(mob/M in GLOB.mob_list)
 	set category = "Admin"
 	set name = "Unprison"
@@ -834,7 +851,7 @@
 /datum/admins/proc/dynamic_mode_options(mob/user)
 	var/dat = {"
 		<center><B><h2>Dynamic Mode Options</h2></B></center><hr>
-		<br/> 
+		<br/>
 		<h3>Common options</h3>
 		<i>All these options can be changed midround.</i> <br/>
 		<br/>
