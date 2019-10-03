@@ -20,7 +20,7 @@ REVIVAL_BRAIN_LIFE -1
 ## Set to time in deciseconds that players must wait before being able to respawn, this forces them to have a random name. ##
 ## Set to 0 to disable this system, set to 1200 deciseconds aka 20 minutes by default ##
 ## Can be changed mid-round with admin verb ##
-RESPAWNTIME 600
+RESPAWNTIME 12000
 
 ## OOC DURING ROUND ###
 ## Comment this out if you want OOC to be automatically disabled during the round, it will be enabled during the lobby and after the round end results.
