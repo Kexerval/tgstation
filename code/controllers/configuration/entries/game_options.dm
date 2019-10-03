@@ -202,6 +202,10 @@
 
 /datum/config_entry/flag/ooc_during_round
 
+/datum/config_entry/number/respawntime //Used to set the time limit for the Timed Respawn system, in deciseconds
+	config_entry_value = 12000
+	min_val = 0
+
 /datum/config_entry/flag/emojis
 
 /datum/config_entry/keyed_list/multiplicative_movespeed

@@ -581,6 +581,62 @@
 //	M.Login()	//wat
 	return
 
+/mob/verb/timed_respawn()
+	set name = "Timed Respawn"
+	set category = "OOC"
+
+	var/respawntime = CONFIG_GET(number/respawntime)
+	if(respawntime == 0)
+		to_chat(usr, "<span class='boldnotice'>Respawning is disabled.</span>")
+		return
+	if ((stat != DEAD || !( SSticker )))
+		to_chat(usr, "<span class='boldnotice'>You must be dead to use this!</span>")
+		return
+
+	else
+		for(var/i in GLOB.dead_mob_list)
+			var/mob/living/O = i
+			if(O.name == usr.name)
+				var/timeofdeath = O.timeofdeath
+				var/deathtime = world.time - timeofdeath
+				var/deathtimeminutes = round(deathtime / 600)
+				var/pluralcheck = "minute"
+				if(deathtimeminutes == 0)
+					pluralcheck = ""
+				else if(deathtimeminutes == 1)
+					pluralcheck = " [deathtimeminutes] minute and"
+				else if(deathtimeminutes > 1)
+					pluralcheck = " [deathtimeminutes] minutes and"
+				var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
+				to_chat(usr, "You have been dead for[pluralcheck] [deathtimeseconds] seconds.")
+				if(deathtime < respawntime)
+					to_chat(usr, "<span class='warning'>You have been dead for[pluralcheck] [deathtimeseconds] seconds. You must wait [respawntime / 600] minutes to respawn!</span>")
+					return
+				var/res = alert(usr, "Do you want to respawn?",, "Yes", "No")
+				switch(res)
+					if("Yes")
+						if(!client)
+							log_game("[key_name(usr)] AM failed due to disconnect.")
+							return
+
+						client.screen.Cut()
+						client.screen += client.void
+						if(!client)
+							log_game("[key_name(usr)] AM failed due to disconnect.")
+							return
+
+						client.prefs.real_name = client.prefs.pref_species.random_name(gender,1)
+						var/mob/dead/new_player/M2 = new /mob/dead/new_player()
+						to_chat(usr, "<span class='boldnotice'>Please roleplay correctly!</span>")
+						if(!client)
+							log_game("[key_name(usr)] AM failed due to disconnect.")
+							qdel(M2)
+							return
+
+						M2.key = key
+						return
+					if("No")
+						return
 
 /**
   * Sometimes helps if the user is stuck in another perspective or camera
