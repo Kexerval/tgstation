@@ -61,15 +61,12 @@
   * * set a random nutrition level
   * * Intialize the movespeed of the mob
   */
-///mob/var/newplayer_respawn_timer_id
-
 /mob/Initialize()
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_CREATED, src)
 	GLOB.mob_list += src
 	GLOB.mob_directory[tag] = src
 	if(stat == DEAD)
 		GLOB.dead_mob_list += src
-		//newplayer_respawn_timer_id = addtimer(CALLBACK(src, /mob/proc/newplayer_respawn_toggle_timer), 10, TIMER_CLIENT_TIME | TIMER_STOPPABLE)
 	else
 		GLOB.alive_mob_list += src
 	set_focus(src)
