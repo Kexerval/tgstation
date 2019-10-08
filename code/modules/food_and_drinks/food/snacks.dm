@@ -53,6 +53,7 @@ All foods are distributed among various categories. Use common sense.
 	var/junkiness = 0  //for junk food. used to lower human satiety.
 	var/list/bonus_reagents //the amount of reagents (usually nutriment and vitamin) added to crafted/cooked snacks, on top of the ingredients reagents.
 	var/customfoodfilling = 1 // whether it can be used as filling in custom food
+	var/package = FALSE
 	var/list/tastes  // for example list("crisps" = 2, "salt" = 1)
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
@@ -92,6 +93,11 @@ All foods are distributed among various categories. Use common sense.
 		to_chat(user, "<span class='warning'>None of [src] left, oh no!</span>")
 		qdel(src)
 		return FALSE
+
+	if(package)
+		to_chat(M, "<span class='warning'>How do you expect to eat this with the package still on?</span>")
+		return FALSE
+
 	if(iscarbon(M))
 		if(!canconsume(M, user))
 			return FALSE
@@ -382,3 +388,63 @@ All foods are distributed among various categories. Use common sense.
 	else
 		return ..()
 
+//MREs
+
+/obj/item/reagent_containers/food/snacks/packaged_meal
+	name = "\improper MRE component"
+	package = TRUE
+	icon_state = "rationpack"
+	var/flavor = "boneless pork ribs"//default value
+	var/component = ""
+	var/unwrap_name = ""
+	var/botulism = 1
+	var/poison = /datum/reagent/consumable/ethanol/neurotoxin
+	flavor
+
+/obj/item/reagent_containers/food/snacks/packaged_meal/Initialize(mapload, newflavor)
+	tastes = list("[pick("The taste is almost unpleasant",
+						"This is fantastic!",
+						"Just gonna eat around this black mold..",
+						"It just smells a little bit stale.",
+						"It definitely has an off putting visual appearance")]" = 1)
+	determinetype(newflavor)
+	desc = "A packaged [icon_state] from a Meal Ready-to-Eat, there is a lengthy list of [pick("obscure", "arcane", "unintelligible", "revolutionary", "sophisticated", "unspellable")] ingredients and addictives printed on the back.</i>"
+	return ..()
+
+/obj/item/reagent_containers/food/snacks/packaged_meal/attack_self(mob/user as mob)
+	if(package)
+		to_chat(user, "<span class='notice'>You pull open the MRE package! [pick("", "", "Nice hiss!", "Yup, definitely some black mold in there..",)]</span>")
+		playsound(loc,'sound/effects/pageturn2.ogg', 15, 1)
+		name = "\improper" + flavor
+		desc = "The contents of a standard issue MRE. This one is " + flavor + "."
+		icon_state = flavor
+		package = FALSE
+
+/obj/item/reagent_containers/food/snacks/packaged_meal/proc/determinetype(newflavor)
+	. =..()
+	if(!botulism == 1)
+		poison = null
+	flavor = newflavor
+
+	switch(newflavor)
+		if("spaghetti and meatballs", "enchiladas", "pizza slice", "chowmein", "steak", "sashimi")
+			icon_state = "rationpack"
+			component = "entree"
+			bonus_reagents = poison = 5
+			list_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/sodiumchloride = 1)
+		if("meatballs", "cheese spread", "beef turnover", "mashed potatoes")
+			icon_state = "rationpack"
+			component = "side"
+			bonus_reagents = poison = 5
+			list_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/consumable/sodiumchloride = 1)
+		if("biscuit", "pretzels", "peanuts", "cracker")
+			icon_state = "bran_requests"
+			component = "snack"
+			bonus_reagents = poison = 5
+			list_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/sodiumchloride = 1)
+		if("spiced apples", "chocolate brownie", "sugar cookie", "choco bar", "crayon")
+			icon_state = "candy"
+			component = "dessert"
+			bonus_reagents = poison = 5
+			list_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/sugar = 1)
+	name = "\improper MRE [component] " + newflavor

@@ -1176,3 +1176,5 @@
 		/obj/item/storage/box/material=1
 		)
 	generate_items_inside(items_inside,src)
+
+
