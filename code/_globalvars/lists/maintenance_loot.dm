@@ -111,6 +111,6 @@ GLOBAL_LIST_INIT(maintenance_loot, list(
 	/obj/item/stake/hardened/silver = 1, //FULP	"" = 3
 	/obj/item/reagent_containers/pill/floorpill = 1,
 	/obj/item/reagent_containers/food/snacks/canned/peaches/maint = 1,
-	/obj/item/storage/MRE = 6,
+	/obj/item/storage/mre = 6,
 	"" = 3
 	))

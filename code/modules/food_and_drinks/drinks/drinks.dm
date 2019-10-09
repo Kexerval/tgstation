@@ -211,7 +211,7 @@
 	foodtype = BREAKFAST
 
 /obj/item/reagent_containers/food/drinks/coffeeinstant
-	name = "coffee instant"
+	name = "coffee instant type 1"
 	icon_state = "coffee instant"
 	list_reagents = list(/datum/reagent/consumable/coffee = 30)
 	spillable = TRUE

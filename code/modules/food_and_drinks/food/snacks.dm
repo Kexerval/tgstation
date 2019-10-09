@@ -395,53 +395,67 @@ All foods are distributed among various categories. Use common sense.
 	package = TRUE
 	icon_state = "entree"
 	var/flavor = "boneless pork ribs"//default value
+	var/list/meal_reagents = list()
 	var/component = ""
-	var/unwrap_name = ""
-	//var/botulism = 1 //needs work
-	//var/poison = list(/datum/reagent/consumable/ethanol/neurotoxin = 2)
-	flavor
+	var/food_age = 2559
 
-/obj/item/reagent_containers/food/snacks/packaged_meal/Initialize(mapload, newflavor)
+/obj/item/reagent_containers/food/snacks/packaged_meal/Initialize(mapload)
 	tastes = list("[pick("something almost unpleasant",
 						"something fantastic",
 						"something strange, just gonna eat around this black mold..",
 						"something a little bit stale",
 						"something delicious",
 						"chemicals")]" = 1)
-	determinetype(newflavor)
-	desc = "A packaged [icon_state] from a Meal Ready-to-Eat, there is a lengthy list of [pick("obscure", "arcane", "unintelligible", "revolutionary", "sophisticated", "unspellable")] ingredients and addictives printed on the back.</i>"
+	determinetype("spaghetti", 2000)
 	return ..()
+
+/obj/item/reagent_containers/food/snacks/packaged_meal/proc/determinetype(newflavor, food_age_new)
+	. = ..()
+	flavor = newflavor
+	food_age = food_age_new
+
+	switch(newflavor)
+		if("boneless pork ribs", "grilled chicken", "pizza square", "spaghetti", "chicken tenders")
+			icon_state = "entree"
+			component = "entree"
+			meal_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/sodiumchloride = 1)
+		if("meatballs", "cheese spread", "beef turnover", "mashed potatoes")
+			icon_state = "side"
+			component = "side"
+			meal_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/consumable/sodiumchloride = 1)
+		if("biscuit", "pretzels", "peanuts", "cracker")
+			icon_state = "snack"
+			component = "snack"
+			meal_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/sodiumchloride = 1)
+		if("spiced apples", "chocolate brownie", "sugar cookie", "choco bar", "crayon")
+			icon_state = "dessert"
+			component = "dessert"
+			meal_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/sugar = 1)
+	switch(food_age)
+		if(2200 to 2559)
+			meal_reagents[/datum/reagent/medicine/omnizine] = 4
+		if(1991 to 2199)
+			meal_reagents[/datum/reagent/toxin/histamine] = 4
+		if(1940 to 1990)
+			meal_reagents[/datum/reagent/toxin/curare] = 4
+	reagents.clear_reagents()
+	reagents.add_reagent_list(meal_reagents)
+	desc = "A packaged [icon_state] from a Meal Ready-to-Eat, there is a lengthy list of [pick("obscure", "arcane", "unintelligible", "revolutionary", "sophisticated", "unspellable")] ingredients and addictives printed on the back.</i>"
+	name = "\improper MRE [icon_state] " + newflavor
 
 /obj/item/reagent_containers/food/snacks/packaged_meal/attack_self(mob/user as mob)
 	if(package)
-		to_chat(user, "<span class='notice'>You pull open the MRE package! [pick("", "", "Nice hiss!", "Yup, definitely some black mold in there..",)]</span>")
+		switch(food_age)
+			if(2200 to 2559)
+				to_chat(user, "<span class='notice'>You pull open the MRE package! [pick("", "", "Oh yeah, look at that!", "Wow! That looks delicious!", "Oh yeah, this is perfect", "Simply amazing")]</span>")
+			if(1991 to 2199)
+				to_chat(user, "<span class='notice'>You pull open the MRE package! [pick("", "", "Nice hiss!", "Yup, definitely some black mold in there..", "This looks almost palatable", "That feels like it should be just fine", "What an amazing find", "Doesn't look too bad..", "You don't find this every day!", "They don't make 'em like they used to")]</span>")
+			if(1940 to 1990)
+				to_chat(user, "<span class='notice'>You pull open the MRE package! [pick("", "Nice hiss!", "Nice hiss!", "Oh gross!", "Ugh definitly contaminated with botulism", "This looks completely inedible", "Aww, look at those pinholes.. darn", "Oh gosh, gonna need to wear a mask for this one", "That just smells foul, definitly rancid")]</span>")
 		playsound(loc,'sound/effects/pageturn2.ogg', 15, 1)
 		name = "\improper" + flavor
 		desc = "The contents of a standard issue MRE. This one is " + flavor + "."
 		icon_state = flavor
 		package = FALSE
 
-/obj/item/reagent_containers/food/snacks/packaged_meal/proc/determinetype(newflavor)
-	. =..()
-	//if(botulism > 1)
-	//	poison = null
-	flavor = newflavor
 
-	switch(newflavor)
-		if("boneless pork ribs", "grilled chicken", "pizza square", "spaghetti", "chicken tenders")
-			icon_state = "entree"
-			component = "entree"
-			list_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/sodiumchloride = 1, /datum/reagent/medicine/omnizine = 3)
-		if("meatballs", "cheese spread", "beef turnover", "mashed potatoes")
-			icon_state = "side"
-			component = "side"
-			list_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/consumable/sodiumchloride = 1, /datum/reagent/medicine/omnizine = 3)
-		if("biscuit", "pretzels", "peanuts", "cracker")
-			icon_state = "snack"
-			component = "snack"
-			list_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/sodiumchloride = 1)
-		if("spiced apples", "chocolate brownie", "sugar cookie", "choco bar", "crayon")
-			icon_state = "dessert"
-			component = "dessert"
-			list_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/sugar = 1)
-	name = "\improper MRE [component] " + newflavor
