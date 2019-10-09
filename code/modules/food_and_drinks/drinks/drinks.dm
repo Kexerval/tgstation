@@ -210,6 +210,15 @@
 	isGlass = FALSE
 	foodtype = BREAKFAST
 
+/obj/item/reagent_containers/food/drinks/coffeeinstant
+	name = "coffee instant type 1"
+	icon_state = "coffee instant"
+	list_reagents = list(/datum/reagent/consumable/coffee = 30)
+	spillable = TRUE
+	resistance_flags = FREEZE_PROOF
+	isGlass = FALSE
+	foodtype = BREAKFAST
+
 /obj/item/reagent_containers/food/drinks/shroud
 	name = "Shroud's Insane Cappuccino"
 	desc = "A classic, yet charged cold brew made for Shroud and the true coffeehead."

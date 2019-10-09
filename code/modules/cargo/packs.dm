@@ -2443,6 +2443,23 @@
 	crate_name = "coffin"
 	crate_type = /obj/structure/closet/crate/coffin
 
+/datum/supply_pack/misc/mre
+	name = "Military Surplus MRE crate"
+	desc = "A shipment of Meal Ready-to-Eats new and old. Supplied by TGMC Military Surplus." //default value
+	cost = 5000
+	contains = list(/obj/item/storage/mre,
+					/obj/item/storage/mre,
+					/obj/item/storage/mre,
+					/obj/item/storage/mre,
+					/obj/item/storage/mre,
+					/obj/item/storage/mre)
+	crate_name = "Military Surplus - MRE"
+	crate_type = /obj/structure/closet/crate/wooden
+
+/datum/supply_pack/misc/MRE/proc/ComponentInitialize()
+	. = ..()
+	desc = "A shipment of Meal Ready-to-Eats new and old. Supplied by TGMC Military Surplus. These could be brand new or from the year [rand(1958, 2559)]. Make sure to check for black mold and maybe wear a mask.. botulisum is no joke."
+
 /datum/supply_pack/misc/religious_supplies
 	name = "Religious Supplies Crate"
 	desc = "Keep your local chaplain happy and well-supplied, lest they call down judgement upon your cargo bay. Contains two bottles of holywater, bibles, chaplain robes, and burial garmets."
