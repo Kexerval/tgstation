@@ -95,7 +95,7 @@ All foods are distributed among various categories. Use common sense.
 		return FALSE
 
 	if(package)
-		to_chat(M, "<span class='warning'>How do you expect to eat this with the package still on?</span>")
+		to_chat(M, "<span class='warning'>How do you expect to eat this while it is still in the package?</span>")
 		return FALSE
 
 	if(iscarbon(M))
